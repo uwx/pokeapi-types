@@ -1,3 +1,5 @@
+import type { MoveDamageClass, Move } from "./moves";
+import type { Characteristic, Nature } from "./pokemon";
 import type { APIResource, Name, NamedAPIResource } from "./utility";
 
 export interface Stat {
@@ -14,9 +16,9 @@ export interface Stat {
     /** A detail of natures which affect this stat positively or negatively. */
     affecting_natures: NatureStatAffectSets;
     /** (Characteristic[]) A list of characteristics that are set on a Pokémon when its highest base stat is this stat. */
-    characteristics: APIResource[];
+    characteristics: APIResource<Characteristic>[];
     /** (MoveDamageClass) The class of damage this stat is directly related to. */
-    move_damage_class: NamedAPIResource;
+    move_damage_class: NamedAPIResource<MoveDamageClass>;
     /** The name of this resource listed in different languages. */
     names: Name[];
 }
@@ -32,12 +34,12 @@ export interface MoveStatAffect {
     /** The maximum amount of change to the referenced stat. */
     change: number;
     /** (Move) The move causing the change. */
-    move: NamedAPIResource;
+    move: NamedAPIResource<Move>;
 }
 
 export interface NatureStatAffectSets {
     /** (Nature[]) A list of natures and how they change the referenced stat. */
-    increase: NamedAPIResource[];
+    increase: NamedAPIResource<Nature>[];
     /** (Nature[]) A list of nature sand how they change the referenced stat. */
-    decrease: NamedAPIResource[];
+    decrease: NamedAPIResource<Nature>[];
 }

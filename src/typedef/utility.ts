@@ -1,4 +1,8 @@
-export interface NamedAPIResourceList {
+import type { EncounterConditionValue, EncounterMethod } from "./encounters";
+import type { Version, Generation, VersionGroup } from "./games";
+import type { Machine } from "./machines";
+
+export interface NamedAPIResourceList<T> {
     /** The total number of resources available from this API. */
     count: number;
     /** The URL for the next page in the list. */
@@ -6,7 +10,7 @@ export interface NamedAPIResourceList {
     /** The URL for the previous page in the list. */
     previous: string;
     /** A list of named API resources. */
-    results: NamedAPIResource[];
+    results: NamedAPIResource<T>[];
 }
 
 export interface Language {
@@ -28,7 +32,9 @@ export interface Language {
 // Common Models
 //
 
-export interface APIResource {
+export interface APIResource<T> {
+    __key?: T;
+
     /** The URL of the referenced resource. */
     url: string;
 }
@@ -37,14 +43,14 @@ export interface Description {
     /** The localized description for an API resource in a specific language. */
     description: string;
     /** (Language) The language this name is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
 }
 
 export interface Effect {
     /** The localized effect text for an API resource in a specific language. */
     effect: string;
     /** (Language) The language this effect is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
 }
 
 export interface Encounter {
@@ -53,44 +59,46 @@ export interface Encounter {
     /** The highest level the Pokémon could be encountered at. */
     max_level: number;
     /** (EncounterConditionValue[]) A list of condition values that must be in effect for this encounter to occur. */
-    condition_values: NamedAPIResource[];
+    condition_values: NamedAPIResource<EncounterConditionValue>[];
     /** Percent chance that this encounter will occur. */
     chance: number;
     /** (EncounterMethod) The method by which this encounter happens. */
-    method: NamedAPIResource;
+    method: NamedAPIResource<EncounterMethod>;
 }
 
 export interface FlavorText {
     /** The localized flavor text for an API resource in a specific language. */
     flavor_text: string;
     /** (Language) The language this name is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
     /** (Version) The game version this flavor text is extracted from. */
-    version: NamedAPIResource;
+    version: NamedAPIResource<Version>;
 }
 
 export interface GenerationGameIndex {
     /** The internal id of an API resource within game data. */
     game_index: number;
     /** (Generation) The generation relevant to this game index. */
-    generation: NamedAPIResource;
+    generation: NamedAPIResource<Generation>;
 }
 
 export interface MachineVersionDetail {
     /** (Machine) The machine that teaches a move from an item. */
-    machine: APIResource;
+    machine: APIResource<Machine>;
     /** (VersionGroup) The version group of this specific machine. */
-    version_group: NamedAPIResource;
+    version_group: NamedAPIResource<VersionGroup>;
 }
 
 export interface Name {
     /** The localized name for an API resource in a specific language. */
     name: string;
     /** (Language) The language this name is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
 }
 
-export interface NamedAPIResource {
+export interface NamedAPIResource<T> {
+    __key?: T;
+
     /** The name of the referenced resource. */
     name: string;
     /** The URL of the referenced resource. */
@@ -103,12 +111,12 @@ export interface VerboseEffect {
     /** The localized effect text in brief. */
     short_effect: string;
     /** (Language) The language this effect is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
 }
 
 export interface VersionEncounterDetail {
     /** (Version) The game version this encounter happens in. */
-    version: NamedAPIResource;
+    version: NamedAPIResource<Version>;
     /** The total percentage of all encounter potential. */
     max_chance: number;
     /** A list of encounters and their specifics. */
@@ -119,14 +127,14 @@ export interface VersionGameIndex {
     /** The internal id of an API resource within game data. */
     game_index: number;
     /** (Version) The version relevant to this game index. */
-    version: NamedAPIResource;
+    version: NamedAPIResource<Version>;
 }
 
 export interface VersionGroupFlavorText {
     /** The localized name for an API resource in a specific language. */
     text: string;
     /** (Language) The language this name is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
     /** (VersionGroup) The version group which uses this flavor text. */
-    version_group: NamedAPIResource;
+    version_group: NamedAPIResource<VersionGroup>;
 }

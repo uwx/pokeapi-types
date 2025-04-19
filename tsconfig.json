@@ -13,7 +13,8 @@
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": false,
         "esModuleInterop": false,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "verbatimModuleSyntax": true,
     },
     "exclude": ["./node_modules/", "./dist/", "./tmp/"]
 }

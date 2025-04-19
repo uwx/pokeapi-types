@@ -1,3 +1,6 @@
+import type { EvolutionChain } from "./evolution";
+import type { Version } from "./games";
+import type { Pokemon } from "./pokemon";
 import type {
     APIResource,
     Description,
@@ -20,11 +23,11 @@ export interface Item {
     /** The power of the move Fling when used with this item. */
     fling_power: number;
     /** (ItemFlingEffect) The effect of the move Fling when used with this item. */
-    fling_effect: NamedAPIResource;
+    fling_effect: NamedAPIResource<ItemFlingEffect>;
     /** (ItemAttribute[]) A list of attributes this item has. */
-    attributes: NamedAPIResource[];
+    attributes: NamedAPIResource<ItemAttribute>[];
     /** (ItemCategory) The category of items this item falls into. */
-    category: NamedAPIResource;
+    category: NamedAPIResource<ItemCategory>;
     /** The effect of this ability listed in different languages. */
     effect_entries: VerboseEffect[];
     /** The flavor text of this ability listed in different languages. */
@@ -38,7 +41,7 @@ export interface Item {
     /** A list of Pokémon that might be found in the wild holding this item. */
     held_by_pokemon: ItemHolderPokemon[];
     /** (EvolutionChain) An evolution chain this item requires to produce a bay during mating. */
-    baby_trigger_for: APIResource;
+    baby_trigger_for: APIResource<EvolutionChain>;
     /** A list of the machines related to this item. */
     machines: MachineVersionDetail[];
 }
@@ -50,7 +53,7 @@ export interface ItemSprites {
 
 export interface ItemHolderPokemon {
     /** (Pokemon) The Pokémon that holds this item. */
-    pokemon: NamedAPIResource;
+    pokemon: NamedAPIResource<Pokemon>;
     /** The details for the version that this item is held in by the Pokémon. */
     version_details: ItemHolderPokemonVersionDetail[];
 }
@@ -59,7 +62,7 @@ export interface ItemHolderPokemonVersionDetail {
     /** How often this Pokémon holds this item in this version. */
     rarity: number;
     /** (Version) The version that this item is held in by the Pokémon. */
-    version: NamedAPIResource;
+    version: NamedAPIResource<Version>;
 }
 
 export interface ItemAttribute {
@@ -68,7 +71,7 @@ export interface ItemAttribute {
     /** The name for this resource. */
     name: string;
     /** (Item[]) A list of items that have this attribute. */
-    items: NamedAPIResource[];
+    items: NamedAPIResource<Item>[];
     /** The name of this item attribute listed in different languages. */
     names: Name[];
     /** The description of this item attribute listed in different languages. */
@@ -81,11 +84,11 @@ export interface ItemCategory {
     /** The name for this resource. */
     name: string;
     /** (Item[]) A list of items that are a part of this category. */
-    items: NamedAPIResource[];
+    items: NamedAPIResource<Item>[];
     /** The name of this item category listed in different languages. */
     names: Name[];
     /** (ItemPocket) The pocket items in this category would be put in. */
-    pocket: NamedAPIResource;
+    pocket: NamedAPIResource<ItemPocket>;
 }
 
 export interface ItemFlingEffect {
@@ -96,7 +99,7 @@ export interface ItemFlingEffect {
     /** The result of this fling effect listed in different languages. */
     effect_entries: Effect[];
     /** (Item[]) A list of items that have this fling effect. */
-    items: NamedAPIResource[];
+    items: NamedAPIResource<Item>[];
 }
 
 export interface ItemPocket {
@@ -105,7 +108,7 @@ export interface ItemPocket {
     /** The name for this resource. */
     name: string;
     /** (ItemCategory[]) A list of item categories that are relevant to this item pocket. */
-    categories: NamedAPIResource[];
+    categories: NamedAPIResource<ItemCategory>[];
     /** The name of this resource listed in different languages. */
     names: Name[];
 }

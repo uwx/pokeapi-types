@@ -1,3 +1,13 @@
-import type * as PokeAPI from "./PokeAPI";
-
-export type { PokeAPI };
+export type * from "./typedef/berries";
+export type * from "./typedef/contests";
+export type * from "./typedef/encounters";
+export type * from "./typedef/evolution";
+export type * from "./typedef/games";
+export type * from "./typedef/items";
+export type * from "./typedef/locations";
+export type * from "./typedef/machines";
+export type * from "./typedef/moves";
+export type * from "./typedef/pokemon";
+export type * from "./typedef/stats";
+export type * from "./typedef/types";
+export type * from "./typedef/utility";

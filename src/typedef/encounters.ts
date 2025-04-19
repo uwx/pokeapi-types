@@ -19,7 +19,7 @@ export interface EncounterCondition {
     /** The name of this resource listed in different languages. */
     names: Name[];
     /** (EncounterConditionValue[]) A list of possible values for this encounter condition. */
-    values: NamedAPIResource[];
+    values: NamedAPIResource<EncounterConditionValue>[];
 }
 
 export interface EncounterConditionValue {
@@ -28,7 +28,7 @@ export interface EncounterConditionValue {
     /** The name for this resource. */
     name: string;
     /** (EncounterCondition) The condition this encounter condition value pertains to. */
-    condition: NamedAPIResource;
+    condition: NamedAPIResource<EncounterCondition>;
     /** The name of this resource listed in different languages. */
     names: Name[];
 }

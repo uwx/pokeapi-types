@@ -1,3 +1,6 @@
+import type { ContestType } from "./contests";
+import type { Item } from "./items";
+import type { Type } from "./types";
 import type { Name, NamedAPIResource } from "./utility";
 
 export interface Berry {
@@ -18,20 +21,20 @@ export interface Berry {
     /** The speed at which this Berry dries out the soil as it grows. A higher rate means the soil dries more quickly. */
     soil_dryness: number;
     /** (BerryFirmness) The firmness of this berry, used in making Pokéblocks or Poffins. */
-    firmness: NamedAPIResource;
+    firmness: NamedAPIResource<BerryFirmness>;
     /** A list of references to each flavor a berry can have and the potency of each of those flavors in regard to this berry. */
     flavors: BerryFlavorMap[];
     /** (Item) Berries are actually items. This is a reference to the item specific data for this berry. */
-    item: NamedAPIResource;
+    item: NamedAPIResource<Item>;
     /** (Type) The type inherited by "Natural Gift" when used with this Berry. */
-    natural_gift_type: NamedAPIResource;
+    natural_gift_type: NamedAPIResource<Type>;
 }
 
 export interface BerryFlavorMap {
     /** How powerful the referenced flavor is for this berry. */
     potency: number;
     /** (BerryFlavor) The referenced berry flavor. */
-    flavor: NamedAPIResource;
+    flavor: NamedAPIResource<BerryFlavor>;
 }
 
 export interface BerryFirmness {
@@ -40,7 +43,7 @@ export interface BerryFirmness {
     /** The name for this resource. */
     name: string;
     /** (Berry[]) A list of the berries with this firmness. */
-    berries: NamedAPIResource[];
+    berries: NamedAPIResource<Berry>[];
     /** The name of this resource listed in different languages. */
     names: Name[];
 }
@@ -53,7 +56,7 @@ export interface BerryFlavor {
     /** A list of the berries with this flavor. */
     berries: FlavorBerryMap[];
     /** (ContestType) The contest type that correlates with this berry flavor. */
-    contest_type: NamedAPIResource;
+    contest_type: NamedAPIResource<ContestType>;
     /** The name of this resource listed in different languages. */
     names: Name[];
 }
@@ -62,5 +65,5 @@ export interface FlavorBerryMap {
     /** How powerful the referenced flavor is for this berry. */
     potency: number;
     /** (Berry) The berry with the referenced flavor. */
-    berry: NamedAPIResource;
+    berry: NamedAPIResource<Berry>;
 }

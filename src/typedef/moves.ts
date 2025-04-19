@@ -1,5 +1,9 @@
+import type { ContestType, ContestEffect, SuperContestEffect } from "./contests";
+import type { Generation, VersionGroup } from "./games";
 import type { AbilityEffectChange } from "./pokemon";
-import type { APIResource, Description, MachineVersionDetail, Name, NamedAPIResource, VerboseEffect } from "./utility";
+import type { Stat } from "./stats";
+import type { Type } from "./types";
+import type { APIResource, Description, Language, MachineVersionDetail, Name, NamedAPIResource, VerboseEffect } from "./utility";
 
 export interface Move {
     /** The identifier for this resource. */
@@ -19,11 +23,11 @@ export interface Move {
     /** A detail of normal and super contest combos that require this move. */
     contest_combos: ContestComboSets;
     /** (ContestType) The type of appeal this move gives a Pokémon when used in a contest. */
-    contest_type: NamedAPIResource;
+    contest_type: NamedAPIResource<ContestType>;
     /** (ContestEffect) The effect the move has when used in a contest. */
-    contest_effect: APIResource;
+    contest_effect: APIResource<ContestEffect>;
     /** (MoveDamageClass) The type of damage the move inflicts on the target, e.g. physical. */
-    damage_class: NamedAPIResource;
+    damage_class: NamedAPIResource<MoveDamageClass>;
     /** The effect of this move listed in different languages. */
     effect_entries: VerboseEffect[];
     /** The list of previous effects this move has had across version groups of the games. */
@@ -31,7 +35,7 @@ export interface Move {
     /** The flavor text of this move listed in different languages. */
     flavor_text_entries: MoveFlavorText[];
     /** (Generation) The generation in which this move was introduced. */
-    generation: NamedAPIResource;
+    generation: NamedAPIResource<Generation>;
     /** A list of the machines that teach this move. */
     machines: MachineVersionDetail[];
     /** Metadata about this move */
@@ -43,11 +47,11 @@ export interface Move {
     /** A list of stats this moves effects and how much it effects them. */
     stat_changes: MoveStatChange[];
     /** (SuperContestEffect) The effect the move has when used in a super contest. */
-    super_contest_effect: APIResource;
+    super_contest_effect: APIResource<SuperContestEffect>;
     /** (MoveTarget) The type of target that will receive the effects of the attack. */
-    target: NamedAPIResource;
+    target: NamedAPIResource<MoveTarget>;
     /** (Type) The elemental type of this move. */
-    type: NamedAPIResource;
+    type: NamedAPIResource<Type>;
 }
 
 export interface ContestComboSets {
@@ -59,25 +63,25 @@ export interface ContestComboSets {
 
 export interface ContestComboDetail {
     /** (Move[]) A list of moves to use before this move. */
-    use_before: NamedAPIResource[];
+    use_before: NamedAPIResource<Move>[];
     /** (Move[]) A list of moves to use after this move. */
-    use_after: NamedAPIResource[];
+    use_after: NamedAPIResource<Move>[];
 }
 
 export interface MoveFlavorText {
     /** The localized flavor text for an api resource in a specific language. */
     flavor_text: string;
     /** (Language) The language this name is in. */
-    language: NamedAPIResource;
+    language: NamedAPIResource<Language>;
     /** (VersionGroup) The version group that uses this flavor text. */
-    version_group: NamedAPIResource;
+    version_group: NamedAPIResource<VersionGroup>;
 }
 
 export interface MoveMetaData {
     /** (MoveAilment) The status ailment this move inflicts on its target. */
-    ailment: NamedAPIResource;
+    ailment: NamedAPIResource<MoveAilment>;
     /** (MoveCategory) The category of move this move falls under, e.g. damage or ailment. */
-    category: NamedAPIResource;
+    category: NamedAPIResource<MoveCategory>;
     /** The minimum number of times this move hits. Null if it always only hits once. */
     min_hits: number;
     /** The maximum number of times this move hits. Null if it always only hits once. */
@@ -104,7 +108,7 @@ export interface MoveStatChange {
     /** The amount of change. */
     change: number;
     /** (Stat) The stat being affected. */
-    stat: NamedAPIResource;
+    stat: NamedAPIResource<Stat>;
 }
 
 export interface PastMoveStatValues {
@@ -119,18 +123,18 @@ export interface PastMoveStatValues {
     /** The effect of this move listed in different languages. */
     effect_entries: VerboseEffect[];
     /** (Type) The elemental type of this move. */
-    type: NamedAPIResource;
+    type: NamedAPIResource<Type>;
     /** (VersionGroup) The version group in which these move stat values were in effect. */
-    version_group: NamedAPIResource;
+    version_group: NamedAPIResource<VersionGroup>;
 }
 
-export interface MoveAliment {
+export interface MoveAilment {
     /** The identifier for this resource. */
     id: number;
     /** The name for this resource. */
     name: string;
     /** (Move[]) A list of moves that cause this ailment. */
-    moves: NamedAPIResource[];
+    moves: NamedAPIResource<Move>[];
     /** The name of this resource listed in different languages. */
     names: Name[];
 }
@@ -150,7 +154,7 @@ export interface MoveCategory {
     /** The name for this resource. */
     name: string;
     /** (Move[]) A list of moves that fall into this category. */
-    moves: NamedAPIResource[];
+    moves: NamedAPIResource<Move>[];
     /** The description of this resource listed in different languages. */
     descriptions: Description[];
 }
@@ -163,7 +167,7 @@ export interface MoveDamageClass {
     /** The description of this resource listed in different languages. */
     descriptions: Description[];
     /** (Move[]) A list of moves that fall into this damage class. */
-    moves: NamedAPIResource[];
+    moves: NamedAPIResource<Move>[];
     /** The name of this resource listed in different languages. */
     names: Name[];
 }
@@ -178,7 +182,7 @@ export interface MoveLearnMethod {
     /** The name of this resource listed in different languages. */
     names: Name[];
     /** (VersionGroup[]) A list of version groups where moves can be learned through this method. */
-    version_groups: NamedAPIResource[];
+    version_groups: NamedAPIResource<VersionGroup>[];
 }
 
 export interface MoveTarget {
@@ -189,7 +193,7 @@ export interface MoveTarget {
     /** The description of this resource listed in different languages. */
     descriptions: Description[];
     /** (Move[]) A list of moves that that are directed at this target. */
-    moves: NamedAPIResource[];
+    moves: NamedAPIResource<Move>[];
     /** The name of this resource listed in different languages. */
     names: Name[];
 }
