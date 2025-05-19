@@ -6,7 +6,6 @@
         "outDir": "./tmp/",
         "allowJs": true,
         "checkJs": true,
-        "declaration": false,
         "isolatedModules": true,
         "strict": true,
         "noUncheckedIndexedAccess": true,
